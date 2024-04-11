@@ -3,12 +3,12 @@
 # "DIFF:" comments explain differences between tutorial and this modified implementation
 
 # DIFF: updated base image to most recent k3s version
-ARG K3S_TAG="v1.27.4-k3s1"
+ARG K3S_TAG="v1.28.8-k3s1"
 
 FROM rancher/k3s:$K3S_TAG as k3s
 
 # DIFF: updated base image to most recent CUDA and base OS version combination
-FROM nvidia/cuda:12.2.0-base-ubuntu22.04
+FROM nvidia/cuda:12.4.1-base-ubuntu22.04
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
