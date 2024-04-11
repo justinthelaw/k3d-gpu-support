@@ -2,13 +2,14 @@
 # MODIFIED IMPLEMENTATION: https://github.com/k3d-io/k3d/issues/1108#issue-1315509856
 # "DIFF:" comments explain differences between tutorial and this modified implementation
 
-# DIFF: updated base image to most recent k3s version
+# DIFF: updated base image to most recent k3s and cuda version
 ARG K3S_TAG="v1.28.8-k3s1"
+ARG CUDA_TAG="12.4.1-base-ubuntu22.04"
 
 FROM rancher/k3s:$K3S_TAG as k3s
 
 # DIFF: updated base image to most recent CUDA and base OS version combination
-FROM nvidia/cuda:12.4.1-base-ubuntu22.04
+FROM nvidia/cuda:$CUDA_TAG
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
@@ -24,6 +25,9 @@ RUN curl -s -L https://nvidia.github.io/nvidia-container-runtime/ubuntu22.04/nvi
 # DIFF: grab necessary NVIDIA toolkit and deps for base image's CUDA version - NVIDIA_CONTAINER_RUNTIME_VERSION arg is deprecated as well
 RUN apt-get update && \
     apt-get -y install nvidia-container-toolkit-base nvidia-container-toolkit nvidia-container-runtime util-linux
+
+# DIFF: configure containerd runtime within container
+RUN sudo nvidia-ctk runtime configure --runtime=containerd
 
 # DIFF: different mount calls than the original k3s image, deliberate k3s deps copy
 COPY --from=k3s /bin/* /bin/
