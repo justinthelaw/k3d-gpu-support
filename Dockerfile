@@ -27,7 +27,7 @@ RUN apt-get update && \
     apt-get -y install nvidia-container-toolkit-base nvidia-container-toolkit nvidia-container-runtime util-linux
 
 # DIFF: configure containerd runtime within container
-RUN sudo nvidia-ctk runtime configure --runtime=containerd
+RUN nvidia-ctk runtime configure --runtime=containerd
 
 # DIFF: different mount calls than the original k3s image, deliberate k3s deps copy
 COPY --from=k3s /bin/* /bin/
