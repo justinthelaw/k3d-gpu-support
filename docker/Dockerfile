@@ -53,13 +53,13 @@ RUN chmod 1777 /tmp
 RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd/
 
 # DIFF: used MODIFIED IMPLEMENTATION config
-COPY config.toml.tmpl /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
+COPY config/config.toml.tmpl /var/lib/rancher/k3s/agent/etc/containerd/config.toml.tmpl
 
 # Deploy the nvidia driver plugin on startup
 RUN mkdir -p /var/lib/rancher/k3s/server/manifests
 
 # DIFF: using the updated NVIDIA device plugin daemonset: https://github.com/NVIDIA/k8s-device-plugin/
-COPY device-plugin-daemonset.yaml /var/lib/rancher/k3s/server/manifests/nvidia-device-plugin-daemonset.yaml
+COPY plugin/device-plugin-daemonset.yaml /var/lib/rancher/k3s/server/manifests/nvidia-device-plugin-daemonset.yaml
 
 VOLUME /var/lib/kubelet
 VOLUME /var/lib/rancher/k3s
