@@ -27,6 +27,10 @@ push-k3d: create-registry build-k3d
 uds: create-registry build-k3d push-k3d
 	uds deploy ${K3D_CLUSTER_NAME} --set K3D_EXTRA_ARGS="--gpus=all --image=localhost:${REGISTRY_PORT}/${ORGANIZATION}/k3d-gpu-support:${TAG}"
 
+test: create-registry build-k3d push-k3d
+	@kubectl apply -f test/cuda-vector-add.yaml
+	@kubectl get pods -w --field-selector metadata.name=gpu-pod
+
 # Clean up: Stop and remove the local registry
 clean:
 	@echo "Cleaning up..."

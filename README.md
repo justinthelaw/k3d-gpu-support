@@ -32,3 +32,7 @@ Run:
 kubectl apply -f test/cuda-vector-add.yaml
 kubectl logs cuda-vector-add
 ```
+
+## References
+
+* https://k3d.io/v5.7.2/usage/advanced/cuda/
