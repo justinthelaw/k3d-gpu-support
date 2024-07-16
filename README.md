@@ -6,7 +6,7 @@ This is a simple repository for preparing a `k3s` + `nvidia/cuda` base image tha
 
 Access to GitHub and GitHub Container Registry. Please follow the [GitHub Container Registry instructions](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry).
 
-Docker and all of its dependencies must be installed. To build and push a new version of the Docker image to the GHCR, Docker Buildx must be installed and configured correctly.
+Docker and all of its dependencies must be installed.
 
 For the container GPU test, a NVIDIA GPU with CUDA cores and drivers must be present. Additionally, the CUDA toolkit and NVIDIA container toolkit must be installed.
 
@@ -16,7 +16,7 @@ For Kubernetes testing and pre-requisites, please see [Kubernetes Deployment](#k
 
 ### Building and Pushing the Image
 
-Run the `./build.sh` script to build and push a new image. Please see script for arguments and options.
+Check out the Make targets for the various options.
 
 ## Kubernetes Deployment
 
