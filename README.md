@@ -23,3 +23,12 @@ Run the `./build.sh` script to build and push a new image. Please see script for
 Follow the instructions in the [zarf-package-k3d-airgap](https://github.com/defenseunicorns/zarf-package-k3d-airgap) repository for bootstrapping a K3d cluster that can access your NVIDIA GPUs.
 
 You can also a use more abstracted version of the above Kubernetes deployment by following the instructions in the [uds-leapfrogai](https://github.com/defenseunicorns/uds-leapfrogai/tree/main/bundles/gpu) bundle repository.
+
+## Test
+
+Run:
+
+```shell
+kubectl apply -f test/cuda-vector-add.yaml
+kubectl logs cuda-vector-add
+```

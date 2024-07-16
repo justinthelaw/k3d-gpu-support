@@ -18,7 +18,7 @@ create-registry:
 
 
 build-k3d: create-registry
-	@docker build --platform=${PLATFORM} -t ghcr.io/${ORGANIZATION}/k3d-gpu-support:${TAG} -f ${DOCKERFILE} . --load
+	@docker build --platform=${PLATFORM} -t ghcr.io/${ORGANIZATION}/k3d-gpu-support:${TAG} -f ${DOCKERFILE} .
 	@docker tag ghcr.io/${ORGANIZATION}/k3d-gpu-support:${TAG} localhost:${REGISTRY_PORT}/${ORGANIZATION}/k3d-gpu-support:${TAG}
 
 push-k3d: create-registry build-k3d
