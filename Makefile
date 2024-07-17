@@ -29,7 +29,8 @@ uds: create-registry build-k3d push-k3d
 
 test: create-registry build-k3d push-k3d
 	@kubectl apply -f test/cuda-vector-add.yaml
-	@kubectl get pods -w --field-selector metadata.name=gpu-pod
+	@kubectl wait --for=jsonpath='{.status.phase}'=Succeeded --timeout=15s pod -l app=gpu-pod
+	@kubectl logs -l app=gpu-pod
 
 # Clean up: Stop and remove the local registry
 clean:
